@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shareYourView_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="user_ID" />
+          </Key>
+          <Property Name="user_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_LName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_IsVerified" Type="bit" Nullable="false" />
+          <Property Name="user_ActivationCode" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="shareYourView_DBModelStoreContainer">
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shareYourView_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="user_ID" />
+          </Key>
+          <Property Name="user_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_FName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_LName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_IsVerified" Type="Boolean" Nullable="false" />
+          <Property Name="user_ActivationCode" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shareYourView_DBModelStoreContainer" CdmEntityContainer="shareYourView_DBEntities">
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="user_FName" ColumnName="user_FName" />
+                <ScalarProperty Name="user_LName" ColumnName="user_LName" />
+                <ScalarProperty Name="user_Email" ColumnName="user_Email" />
+                <ScalarProperty Name="user_Username" ColumnName="user_Username" />
+                <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+                <ScalarProperty Name="user_IsVerified" ColumnName="user_IsVerified" />
+                <ScalarProperty Name="user_ActivationCode" ColumnName="user_ActivationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

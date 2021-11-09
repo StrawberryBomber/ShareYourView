@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shareYourView_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="user_ID" />
+    </Key>
+    <Property Name="user_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_LName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_IsVerified" Type="bit" Nullable="false" />
+    <Property Name="user_ActivationCode" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="shareYourView_DBModelStoreContainer">
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

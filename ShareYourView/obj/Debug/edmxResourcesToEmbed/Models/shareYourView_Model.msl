@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shareYourView_DBModelStoreContainer" CdmEntityContainer="shareYourView_DBEntities">
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="shareYourView_DBModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+          <ScalarProperty Name="user_FName" ColumnName="user_FName" />
+          <ScalarProperty Name="user_LName" ColumnName="user_LName" />
+          <ScalarProperty Name="user_Email" ColumnName="user_Email" />
+          <ScalarProperty Name="user_Username" ColumnName="user_Username" />
+          <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+          <ScalarProperty Name="user_IsVerified" ColumnName="user_IsVerified" />
+          <ScalarProperty Name="user_ActivationCode" ColumnName="user_ActivationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
