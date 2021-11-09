@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ShareYourView.Controllers
 {
@@ -57,7 +58,7 @@ namespace ShareYourView.Controllers
 
                         //Send email to User
                         SendVerifactionLinkEmail(userDetail.user_Email, userDetail.user_ActivationCode.ToString());
-                        Message = "Registration successfully done. Account verification link has been send to your email address. Please go and verify your account";
+                        Message = "Registration successfully done. Account verification link has been send to your email address. Please go and verify your account: " + userDetail.user_Email;
                         Status = true;
                     }
                 #endregion
@@ -73,15 +74,93 @@ namespace ShareYourView.Controllers
             return View(userDetail);
         }
 
-        //Verify Email
+        //Verify User
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool Status = false;
 
-        //Verify Email LINK
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+
+                var v = db.UserDetails.Where(a => a.user_ActivationCode == new Guid(id)).FirstOrDefault();
+                if(v != null)
+                {
+                    v.user_IsVerified = true;
+                    db.SaveChanges();
+                    Status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
+                }
+            }
+            ViewBag.Status = Status;
+            return View();
+        }
 
         //Login
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         //Login POST Action
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin login, string ReturnUrl = "")
+        {
+            string Message = "";
+
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                var v = db.UserDetails.Where(a => a.user_Username == login.user_Username).FirstOrDefault();
+                if(v != null)
+                {
+                    if(string.Compare(Crypto.Hash(login.user_Password), v.user_Password) == 0)
+                    {
+                        int timeout = login.RememberMe ? 525600 : 1;
+                        var ticket = new FormsAuthenticationTicket(login.user_Username, login.RememberMe, timeout);
+                        string encrypted = FormsAuthentication.Encrypt(ticket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                        cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                        cookie.HttpOnly = true;
+                        Response.Cookies.Add(cookie);
+
+                        if(Url.IsLocalUrl(ReturnUrl))
+                        {
+                            return Redirect(ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        Message = "Invalid Password provided";
+                    }
+                }
+                else
+                {
+                    Message = "Imvalid credentials provided";
+                }
+            }
+
+                ViewBag.Message = Message;
+            return View(login);
+        }
 
         //Logout
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
+        }
 
         [NonAction]
         public bool isEmailExist(string email)
