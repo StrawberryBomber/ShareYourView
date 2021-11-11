@@ -58,9 +58,6 @@
                 @Html.DisplayNameFor(model => model.Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Version)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CreatedTime)
             </th>
             <th>
@@ -85,9 +82,6 @@
                             string NewSize = KiloByte + " KB";
                         }
                         @NewSize
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Version)
                     </td>
                     <td>
                         @string.Format("{0: MM/dd/yyyy}", Convert.ToDateTime(Html.DisplayFor(modelItem => item.CreatedTime).ToString()))

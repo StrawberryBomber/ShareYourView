@@ -15,14 +15,22 @@ namespace ShareYourView.Controllers
         {            
             return View();
         }
-               
 
-        //
+
+        //viewSharedImages
         [Authorize]
         [HttpPost]
-        public ActionResult viewAlbums()
+        public ActionResult viewImages()
         {
             return RedirectToAction("GetGoogleDriveFiles", "Image");
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult viewSharedImages()
+        {
+            return RedirectToAction("GetGoogleShareDriveFiles", "Share");
+        }
+
     }
 }

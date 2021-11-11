@@ -10,16 +10,25 @@ Welcome
 <br />
 <br />
 
-@using (Html.BeginForm("ViewAlbums", "Home", FormMethod.Post))
+@using (Html.BeginForm("viewImages", "Home", FormMethod.Post))
 {
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="View Albums" class="btn btn-default" />
+            <input type="submit" value="View Images" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("viewSharedImages", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="View Shared Images" class="btn btn-default" />
         </div>
     </div>
 }
 
 @using (Html.BeginForm("Logout", "User", FormMethod.Post))
 {
-    <a href="javascript:;" onclick="document.forms[1].submit();">Logout</a>
+    <a href="javascript:;" onclick="document.forms[2].submit();">Logout</a>
 }

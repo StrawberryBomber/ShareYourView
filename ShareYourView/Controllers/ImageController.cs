@@ -16,15 +16,6 @@ namespace ShareYourView.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Index(HttpPostedFileBase file)
-        //{
-        //    GoogleDriveAPIHelper.UplaodFileOnDrive(file);
-        //    ViewBag.Success = "File Uploaded on Google Drive";
-        //    //GoogleDriveAPIHelper.GetDriveFiles();
-        //    return View();
-        //}
-
         [HttpGet]
         public ActionResult GetGoogleDriveFiles()
         {

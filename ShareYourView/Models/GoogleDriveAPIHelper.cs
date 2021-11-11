@@ -67,7 +67,12 @@ namespace ShareYourView.Models
                     request.Upload();
                 }
 
-
+                using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                {
+                    var v = db.UserDetails.Where(a => a.user_Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                    int user_id = v.user_ID;
+                    saveImageToDatabase((Path.GetFileNameWithoutExtension(file.FileName) + "@" + HttpContext.Current.User.Identity.Name + Path.GetExtension(file.FileName)), user_id);
+                }
 
             }
         }
@@ -101,13 +106,26 @@ namespace ShareYourView.Models
                     };
                     if(file.Name.Contains(HttpContext.Current.User.Identity.Name))
                     {
-                        File.Name = file.Name.Replace("@" + HttpContext.Current.User.Identity.Name, "");                        
+                        File.Name = file.Name.Replace("@" + HttpContext.Current.User.Identity.Name, "");
+                        
                         FileList.Add(File);
                     }
                     
                 }
             }
             return FileList;
+        }
+
+        private static void saveImageToDatabase(string fileName, int id)
+        {
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                ImageDetail imgD = new ImageDetail();
+                imgD.image_Name = fileName;
+                imgD.user_ID = id;
+                db.ImageDetails.Add(imgD);
+                db.SaveChanges();
+            }
         }
 
         public static List<GoogleDriveFile> GetShareDriveFiles()
@@ -136,22 +154,34 @@ namespace ShareYourView.Models
                         Version = file.Version,
                         CreatedTime = file.CreatedTime
                     };
-                    if (file.Name.Contains(HttpContext.Current.User.Identity.Name))
-                    {
 
-                        using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                    using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                    {
+                        var v = db.UserDetails.Where(a => a.user_Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                        if (v != null)
                         {
-                            var v = db.UserDetails.Where(a => a.user_Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
-                            if (v != null)
+
+                            //Get List from images
+                            List<ImageShared> listShare = new List<ImageShared>();
+                            listShare = db.ImageShareds.Where(a => a.user_ID == v.user_ID).ToList();
+
+                            List<ImageDetail> listDetail = new List<ImageDetail>();
+
+                            foreach(var i in listShare)
                             {
-                                //Get List from images
+                                //Get Image WHere the image id is equal to the userId shared imageID
+                                var x = db.ImageDetails.Where(a => a.image_ID == i.image_ID).FirstOrDefault();
+
+                                if(x.image_Name == file.Name)
+                                {
+                                    File.Name = file.Name.Substring(0, file.Name.IndexOf('@'));
+                                    FileList.Add(File);
+                                }
+
                             }
                         }
-
-                        File.Name = file.Name.Replace("@" + HttpContext.Current.User.Identity.Name, "");
-                        FileList.Add(File);
-                    }
-
+                    }                    
+                    
                 }
             }
             return FileList;
