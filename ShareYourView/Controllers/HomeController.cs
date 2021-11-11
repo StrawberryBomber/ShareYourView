@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShareYourView.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,17 @@ namespace ShareYourView.Controllers
         // GET: Home
         [Authorize]
         public ActionResult Index()
-        {
+        {            
             return View();
+        }
+               
+
+        //
+        [Authorize]
+        [HttpPost]
+        public ActionResult viewAlbums()
+        {
+            return RedirectToAction("GetGoogleDriveFiles", "Image");
         }
     }
 }

@@ -121,7 +121,8 @@ namespace ShareYourView.Controllers
                 {
                     if(string.Compare(Crypto.Hash(login.user_Password), v.user_Password) == 0)
                     {
-                        int timeout = login.RememberMe ? 525600 : 1;
+                        //int timeout = login.RememberMe ? 525600 : 1;
+                        int timeout = login.RememberMe ? 5 : 1;
                         var ticket = new FormsAuthenticationTicket(login.user_Username, login.RememberMe, timeout);
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
@@ -161,6 +162,7 @@ namespace ShareYourView.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "User");
         }
+                
 
         [NonAction]
         public bool isEmailExist(string email)
