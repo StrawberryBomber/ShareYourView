@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="shareYourView_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ImageDetails">
+          <Key>
+            <PropertyRef Name="image_ID" />
+          </Key>
+          <Property Name="image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ImageShared">
+          <Key>
+            <PropertyRef Name="shared_ID" />
+          </Key>
+          <Property Name="shared_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image_ID" Type="int" />
+          <Property Name="user_ID" Type="int" />
+        </EntityType>
         <EntityType Name="UserDetails">
           <Key>
             <PropertyRef Name="user_ID" />
@@ -14,11 +30,13 @@
           <Property Name="user_LName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="user_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="user_Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="user_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_Password" Type="nvarchar(max)" Nullable="false" />
           <Property Name="user_IsVerified" Type="bit" Nullable="false" />
           <Property Name="user_ActivationCode" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityContainer Name="shareYourView_DBModelStoreContainer">
+          <EntitySet Name="ImageDetails" EntityType="Self.ImageDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageShared" EntityType="Self.ImageShared" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -26,6 +44,22 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="shareYourView_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ImageDetail">
+          <Key>
+            <PropertyRef Name="image_ID" />
+          </Key>
+          <Property Name="image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ImageShared">
+          <Key>
+            <PropertyRef Name="shared_ID" />
+          </Key>
+          <Property Name="shared_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image_ID" Type="Int32" />
+          <Property Name="user_ID" Type="Int32" />
+        </EntityType>
         <EntityType Name="UserDetail">
           <Key>
             <PropertyRef Name="user_ID" />
@@ -35,11 +69,13 @@
           <Property Name="user_LName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="user_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_IsVerified" Type="Boolean" Nullable="false" />
           <Property Name="user_ActivationCode" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ImageDetails" EntityType="Self.ImageDetail" />
+          <EntitySet Name="ImageShareds" EntityType="Self.ImageShared" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
         </EntityContainer>
       </Schema>
@@ -48,6 +84,24 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="shareYourView_DBModelStoreContainer" CdmEntityContainer="shareYourView_DBEntities">
+          <EntitySetMapping Name="ImageDetails">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.ImageDetail">
+              <MappingFragment StoreEntitySet="ImageDetails">
+                <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+                <ScalarProperty Name="image_Name" ColumnName="image_Name" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageShareds">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.ImageShared">
+              <MappingFragment StoreEntitySet="ImageShared">
+                <ScalarProperty Name="shared_ID" ColumnName="shared_ID" />
+                <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="shareYourView_DBModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">

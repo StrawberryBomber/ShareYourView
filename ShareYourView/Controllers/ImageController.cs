@@ -56,6 +56,12 @@ namespace ShareYourView.Controllers
             Response.End();
             Response.Flush();
         }
+
+        [HttpPost]
+        public ActionResult returnToHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 
 }

@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="shareYourView_DBModelStoreContainer" CdmEntityContainer="shareYourView_DBEntities">
+    <EntitySetMapping Name="ImageDetails">
+      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageDetail">
+        <MappingFragment StoreEntitySet="ImageDetails">
+          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+          <ScalarProperty Name="image_Name" ColumnName="image_Name" />
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageShareds">
+      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageShared">
+        <MappingFragment StoreEntitySet="ImageShared">
+          <ScalarProperty Name="shared_ID" ColumnName="shared_ID" />
+          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UserDetails">
       <EntityTypeMapping TypeName="shareYourView_DBModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetails">

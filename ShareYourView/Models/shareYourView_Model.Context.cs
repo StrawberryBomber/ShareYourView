@@ -25,6 +25,8 @@ namespace ShareYourView.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ImageDetail> ImageDetails { get; set; }
+        public virtual DbSet<ImageShared> ImageShareds { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
     }
 }

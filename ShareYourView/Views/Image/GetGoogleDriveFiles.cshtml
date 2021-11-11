@@ -115,6 +115,15 @@
 
 </center>
 
+@using (Html.BeginForm("returnToHome", "Image", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Return Home" class="btn btn-default" />
+        </div>
+    </div>
+}
+
 <script>
     $(document).on('click', '.DownloadFile', function () {
         debugger;

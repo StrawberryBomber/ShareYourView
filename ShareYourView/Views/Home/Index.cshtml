@@ -19,50 +19,7 @@ Welcome
     </div>
 }
 
-@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="row" style="margin-top:10px;margin-bottom:10px;">
-        <div class="col-md-2"><label for="file">Upload file on drive:</label></div>
-        <div class="col-md-10">
-            <input type="file" name="file" id="file" />
-        </div>
-        <div class="col-md-2">
-            <br />
-            <input type="submit" class="btn btn-success" value="Upload" />
-        </div>
-    </div>
-}
-
-@ViewBag.Success*@
-
 @using (Html.BeginForm("Logout", "User", FormMethod.Post))
 {
-    <a href="javascript:;" onclick="document.forms[0].submit();">Logout</a>
+    <a href="javascript:;" onclick="document.forms[1].submit();">Logout</a>
 }
-
-@*Welcome @HttpContext.Current.User.Identity.Name
-
-    @if(Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "Logout"}))
-        {
-            <a href="javascript:document.getElemetById('Logout').submit()">Logout</a>
-        }
-    }*@
-
-
-@*@{
-        ViewBag.Title = "Index";
-    }
-
-    <h2>Index</h2>
-
-    Welcome @HttpContext.Current.User.Identity.Name
-
-    @if(Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm"}))
-        {
-            <a href="javascript:document.getElemetById('logoutForm').submit()">Logout</a>
-        }
-    }*@

@@ -129,16 +129,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\shareYourView_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>shareYourView_Model.Context.cs</LastGenOutput>
-      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\shareYourView_Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
-      <LastGenOutput>shareYourView_Model.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -147,7 +137,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\shareYourView_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>shareYourView_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\shareYourView_Model.edmx.diagram">
+      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Models\shareYourView_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
+      <LastGenOutput>shareYourView_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\shareYourView_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
+      <LastGenOutput>shareYourView_Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -174,6 +181,12 @@
     <Compile Include="Models\Extended\UserDetail.cs" />
     <Compile Include="Models\GoogleDriveAPIHelper.cs" />
     <Compile Include="Models\GoogleDriveFile.cs" />
+    <Compile Include="Models\ImageDetail.cs">
+      <DependentUpon>shareYourView_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImageShared.cs">
+      <DependentUpon>shareYourView_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\shareYourView_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,13 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\shareYourView_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>shareYourView_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\shareYourView_Model.edmx.diagram">
-      <DependentUpon>shareYourView_Model.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

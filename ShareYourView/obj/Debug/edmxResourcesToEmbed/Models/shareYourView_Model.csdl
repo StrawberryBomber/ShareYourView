@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="shareYourView_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ImageDetail">
+    <Key>
+      <PropertyRef Name="image_ID" />
+    </Key>
+    <Property Name="image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="image_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ImageShared">
+    <Key>
+      <PropertyRef Name="shared_ID" />
+    </Key>
+    <Property Name="shared_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="image_ID" Type="Int32" />
+    <Property Name="user_ID" Type="Int32" />
+  </EntityType>
   <EntityType Name="UserDetail">
     <Key>
       <PropertyRef Name="user_ID" />
@@ -9,11 +25,13 @@
     <Property Name="user_LName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="user_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="user_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="user_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="user_IsVerified" Type="Boolean" Nullable="false" />
     <Property Name="user_ActivationCode" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ImageDetails" EntityType="Self.ImageDetail" />
+    <EntitySet Name="ImageShareds" EntityType="Self.ImageShared" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
   </EntityContainer>
 </Schema>
