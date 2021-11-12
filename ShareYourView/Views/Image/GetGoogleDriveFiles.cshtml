@@ -93,6 +93,7 @@
                         @using (Html.BeginForm("DeleteFile", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             <input type="hidden" name=Id value="@item.Id">
+                            <input type="hidden" name=Name value="@item.Name" />
                             <input type="submit" class="DeleteFile" value="Delete" style="align-content:center" />
                         }
 

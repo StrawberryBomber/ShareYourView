@@ -249,6 +249,39 @@ namespace ShareYourView.Models
                     throw new ArgumentNullException(file.Id);
                 }
 
+                using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                {
+                    string fileName = file.Name.Substring(0, file.Name.IndexOf('.'));
+                    fileName += ("@" + HttpContext.Current.User.Identity.Name);
+                    fileName += file.Name.Substring(file.Name.IndexOf('.'));
+                                       
+
+                    var x = db.ImageDetails.Where(a => a.image_Name == fileName).FirstOrDefault();
+                    if(x != null)
+                    {
+                        Debug.WriteLine("\n\n\n\n\nA=" + fileName + "=A\n\n\n\n");
+
+                        int _imageID = x.image_ID;
+                        db.ImageDetails.Remove(x);
+                        //db.SaveChanges();
+
+
+                        List<ImageShared> listShare = new List<ImageShared>();
+                        listShare = db.ImageShareds.Where(a => a.image_ID == _imageID).ToList();
+
+                        foreach (var c in listShare)
+                        {
+                            Debug.WriteLine("\n\n\n\n\nB=" + c.image_ID + "=B\n\n\n\n");
+                            db.ImageShareds.Remove(c);
+                            
+                        }
+
+
+                        db.SaveChanges();
+                    }
+                    
+                }
+
                 service.Files.Delete(file.Id).Execute();
             }
             catch (Exception ex)
