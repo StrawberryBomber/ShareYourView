@@ -12,7 +12,7 @@
     <Key>
       <PropertyRef Name="image_ID" />
     </Key>
-    <Property Name="image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="image_ID" Type="Int32" Nullable="false" />
     <Property Name="Longitude" Type="Double" />
     <Property Name="Latitude" Type="Double" />
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

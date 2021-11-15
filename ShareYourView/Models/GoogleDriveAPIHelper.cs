@@ -258,7 +258,7 @@ namespace ShareYourView.Models
                     var x = db.ImageDetails.Where(a => a.image_Name == fileName).FirstOrDefault();
                     if(x != null)
                     {
-                        Debug.WriteLine("\n\n\n\n\nA=" + fileName + "=A\n\n\n\n");
+                        //Debug.WriteLine("\n\n\n\n\nA=" + fileName + "=A\n\n\n\n");
 
                         int _imageID = x.image_ID;
                         db.ImageDetails.Remove(x);
@@ -270,9 +270,17 @@ namespace ShareYourView.Models
 
                         foreach (var c in listShare)
                         {
-                            Debug.WriteLine("\n\n\n\n\nB=" + c.image_ID + "=B\n\n\n\n");
+                            //Debug.WriteLine("\n\n\n\n\nB=" + c.image_ID + "=B\n\n\n\n");
                             db.ImageShareds.Remove(c);
                             
+                        }
+
+                        List<ImageMetadata> metaData = new List<ImageMetadata>();
+                        metaData = db.ImageMetadatas.Where(a => a.image_ID == _imageID).ToList();
+
+                        foreach(var c in metaData)
+                        {
+                            db.ImageMetadatas.Remove(c);
                         }
 
 

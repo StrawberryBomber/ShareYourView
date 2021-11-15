@@ -137,6 +137,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Compile Include="Controllers\CreateController.cs" />
     <EntityDeploy Include="Models\shareYourView_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>shareYourView_Model.Designer.cs</LastGenOutput>
@@ -181,6 +182,7 @@
     </Compile>
     <Compile Include="Hash\Crypto.cs" />
     <Compile Include="Models\DetailsHelper.cs" />
+    <Compile Include="Models\Extended\ImageMetadata.cs" />
     <Compile Include="Models\Extended\UserDetail.cs" />
     <Compile Include="Models\GoogleDriveAPIHelper.cs" />
     <Compile Include="Models\GoogleDriveFile.cs" />
@@ -234,6 +236,7 @@
     <Content Include="Views\Image\GetGoogleDriveFiles.cshtml" />
     <Content Include="Views\Share\GetGoogleShareDriveFiles.cshtml" />
     <Content Include="Views\Detail\DisplayView.cshtml" />
+    <Content Include="Views\Create\uploadNewImage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
