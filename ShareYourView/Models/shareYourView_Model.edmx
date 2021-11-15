@@ -13,6 +13,18 @@
           <Property Name="image_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="user_ID" Type="int" />
         </EntityType>
+        <EntityType Name="ImageMetadata">
+          <Key>
+            <PropertyRef Name="image_ID" />
+          </Key>
+          <Property Name="image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="capturedData" Type="date" />
+          <Property Name="capturedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ImageShared">
           <Key>
             <PropertyRef Name="shared_ID" />
@@ -20,6 +32,21 @@
           <Property Name="shared_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="image_ID" Type="int" />
           <Property Name="user_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ImageTag">
+          <Key>
+            <PropertyRef Name="imageTag_ID" />
+          </Key>
+          <Property Name="imageTag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image_ID" Type="int" />
+          <Property Name="tag_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="tag_ID" />
+          </Key>
+          <Property Name="tag_ID" Type="int" Nullable="false" />
+          <Property Name="tag_Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -36,7 +63,10 @@
         </EntityType>
         <EntityContainer Name="shareYourView_DBModelStoreContainer">
           <EntitySet Name="ImageDetails" EntityType="Self.ImageDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageMetadata" EntityType="Self.ImageMetadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageShared" EntityType="Self.ImageShared" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageTag" EntityType="Self.ImageTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -52,6 +82,18 @@
           <Property Name="image_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_ID" Type="Int32" />
         </EntityType>
+        <EntityType Name="ImageMetadata">
+          <Key>
+            <PropertyRef Name="image_ID" />
+          </Key>
+          <Property Name="image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="capturedData" Type="DateTime" Precision="0" />
+          <Property Name="capturedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ImageShared">
           <Key>
             <PropertyRef Name="shared_ID" />
@@ -59,6 +101,21 @@
           <Property Name="shared_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="image_ID" Type="Int32" />
           <Property Name="user_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ImageTag">
+          <Key>
+            <PropertyRef Name="imageTag_ID" />
+          </Key>
+          <Property Name="imageTag_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image_ID" Type="Int32" />
+          <Property Name="tag_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="tag_ID" />
+          </Key>
+          <Property Name="tag_ID" Type="Int32" Nullable="false" />
+          <Property Name="tag_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -75,7 +132,10 @@
         </EntityType>
         <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ImageDetails" EntityType="Self.ImageDetail" />
+          <EntitySet Name="ImageMetadatas" EntityType="Self.ImageMetadata" />
           <EntitySet Name="ImageShareds" EntityType="Self.ImageShared" />
+          <EntitySet Name="ImageTags" EntityType="Self.ImageTag" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
         </EntityContainer>
       </Schema>
@@ -93,12 +153,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ImageMetadatas">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.ImageMetadata">
+              <MappingFragment StoreEntitySet="ImageMetadata">
+                <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="capturedData" ColumnName="capturedData" />
+                <ScalarProperty Name="capturedBy" ColumnName="capturedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ImageShareds">
             <EntityTypeMapping TypeName="shareYourView_DBModel.ImageShared">
               <MappingFragment StoreEntitySet="ImageShared">
                 <ScalarProperty Name="shared_ID" ColumnName="shared_ID" />
                 <ScalarProperty Name="image_ID" ColumnName="image_ID" />
                 <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageTags">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.ImageTag">
+              <MappingFragment StoreEntitySet="ImageTag">
+                <ScalarProperty Name="imageTag_ID" ColumnName="imageTag_ID" />
+                <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+                <ScalarProperty Name="tag_ID" ColumnName="tag_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="shareYourView_DBModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="tag_ID" ColumnName="tag_ID" />
+                <ScalarProperty Name="tag_Name" ColumnName="tag_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

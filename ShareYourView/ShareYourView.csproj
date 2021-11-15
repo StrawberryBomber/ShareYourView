@@ -187,7 +187,13 @@
     <Compile Include="Models\ImageDetail.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageMetadata.cs">
+      <DependentUpon>shareYourView_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ImageShared.cs">
+      <DependentUpon>shareYourView_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImageTag.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\shareYourView_Model.Context.cs">
@@ -204,6 +210,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>shareYourView_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>

@@ -8,6 +8,18 @@
     <Property Name="image_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="user_ID" Type="Int32" />
   </EntityType>
+  <EntityType Name="ImageMetadata">
+    <Key>
+      <PropertyRef Name="image_ID" />
+    </Key>
+    <Property Name="image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="capturedData" Type="DateTime" Precision="0" />
+    <Property Name="capturedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="ImageShared">
     <Key>
       <PropertyRef Name="shared_ID" />
@@ -15,6 +27,21 @@
     <Property Name="shared_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="image_ID" Type="Int32" />
     <Property Name="user_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ImageTag">
+    <Key>
+      <PropertyRef Name="imageTag_ID" />
+    </Key>
+    <Property Name="imageTag_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="image_ID" Type="Int32" />
+    <Property Name="tag_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="tag_ID" />
+    </Key>
+    <Property Name="tag_ID" Type="Int32" Nullable="false" />
+    <Property Name="tag_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>
@@ -31,7 +58,10 @@
   </EntityType>
   <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ImageDetails" EntityType="Self.ImageDetail" />
+    <EntitySet Name="ImageMetadatas" EntityType="Self.ImageMetadata" />
     <EntitySet Name="ImageShareds" EntityType="Self.ImageShared" />
+    <EntitySet Name="ImageTags" EntityType="Self.ImageTag" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
   </EntityContainer>
 </Schema>

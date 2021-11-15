@@ -8,6 +8,18 @@
     <Property Name="image_Name" Type="nvarchar" MaxLength="50" />
     <Property Name="user_ID" Type="int" />
   </EntityType>
+  <EntityType Name="ImageMetadata">
+    <Key>
+      <PropertyRef Name="image_ID" />
+    </Key>
+    <Property Name="image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="capturedData" Type="date" />
+    <Property Name="capturedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="ImageShared">
     <Key>
       <PropertyRef Name="shared_ID" />
@@ -15,6 +27,21 @@
     <Property Name="shared_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="image_ID" Type="int" />
     <Property Name="user_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="ImageTag">
+    <Key>
+      <PropertyRef Name="imageTag_ID" />
+    </Key>
+    <Property Name="imageTag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image_ID" Type="int" />
+    <Property Name="tag_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="tag_ID" />
+    </Key>
+    <Property Name="tag_ID" Type="int" Nullable="false" />
+    <Property Name="tag_Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserDetails">
     <Key>
@@ -31,7 +58,10 @@
   </EntityType>
   <EntityContainer Name="shareYourView_DBModelStoreContainer">
     <EntitySet Name="ImageDetails" EntityType="Self.ImageDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageMetadata" EntityType="Self.ImageMetadata" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageShared" EntityType="Self.ImageShared" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageTag" EntityType="Self.ImageTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
