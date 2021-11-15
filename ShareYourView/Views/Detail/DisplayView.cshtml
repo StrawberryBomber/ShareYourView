@@ -1,10 +1,92 @@
-﻿
+﻿@model ShareYourView.Models.ImageMetadata
+
 @{
     ViewBag.Title = "DisplayView";
 }
 
-<h2>DisplayView</h2>
+<h2>Image</h2>
+<style>
+    :root {
+        --box-side: min( 42vmin, 480px );
+    }
+
+    body {
+        align-items: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        background: grey;
+        border: 1px solid black;
+        height: var( --box-side );
+        object-fit: contain;
+        width: var( --box-side );
+    }
+</style>
 
 <div>
     <img src="~/GoogleDriveFiles/@Path.GetFileName(ViewBag.Image)" />
+</div>
+
+<div>
+    <h4>Image Details:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.capturedData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.capturedData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.capturedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.capturedBy)
+        </dd>
+
+    </dl>
 </div>

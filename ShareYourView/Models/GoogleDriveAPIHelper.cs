@@ -90,8 +90,7 @@ namespace ShareYourView.Models
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = FileListRequest.Execute().Files;
             List<GoogleDriveFile> FileList = new List<GoogleDriveFile>();
-            // For getting only folders
-            // files = files.Where(x => x.MimeType == "application/vnd.google-apps.folder").ToList();
+
             if (files != null && files.Count > 0)
             {
                 foreach (var file in files)
