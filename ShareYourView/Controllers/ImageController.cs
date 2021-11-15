@@ -54,6 +54,12 @@ namespace ShareYourView.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public ActionResult DisplayView(GoogleDriveFile _file)
+        {
+            return RedirectToAction("DisplayView", "Detail", _file);
+        }
     }
 
 }

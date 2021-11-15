@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
@@ -179,6 +180,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hash\Crypto.cs" />
+    <Compile Include="Models\DetailsHelper.cs" />
     <Compile Include="Models\Extended\UserDetail.cs" />
     <Compile Include="Models\GoogleDriveAPIHelper.cs" />
     <Compile Include="Models\GoogleDriveFile.cs" />
@@ -222,6 +224,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Image\GetGoogleDriveFiles.cshtml" />
     <Content Include="Views\Share\GetGoogleShareDriveFiles.cshtml" />
+    <Content Include="Views\Detail\DisplayView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

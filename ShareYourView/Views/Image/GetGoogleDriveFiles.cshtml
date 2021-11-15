@@ -61,6 +61,9 @@
                 @Html.DisplayNameFor(model => model.CreatedTime)
             </th>
             <th>
+                Details
+            </th>
+            <th>
                 Download
             </th>
             <th>
@@ -74,17 +77,25 @@
             {
                 <tr id="layouttable">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.Name)                        
                     </td>
                     <td>
                         @{
-                            long? KiloByte = @item.Size / 1024;
+                                long? KiloByte = @item.Size / 1024;
                             string NewSize = KiloByte + " KB";
                         }
                         @NewSize
                     </td>
                     <td>
                         @string.Format("{0: MM/dd/yyyy}", Convert.ToDateTime(Html.DisplayFor(modelItem => item.CreatedTime).ToString()))
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DisplayView", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input type="hidden" name=Name value="@item.Name" />
+                            <input type="submit" class="DisplayView" value="Details" style="align-content:center"/>
+                        }
                     </td>
                     <td>
                         <input type="button" class="DownloadFile" value="Download" data-key=@item.Id style="align-content:center" />
@@ -114,7 +125,7 @@
 {
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Return Home" class="btn btn-default" />
+            <input type="submit" value="Return Home" class="btn btn-default"/>
         </div>
     </div>
 }
