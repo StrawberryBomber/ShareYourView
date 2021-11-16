@@ -26,21 +26,7 @@ namespace ShareYourView.Controllers
         [HttpGet]
         public ActionResult DisplayView(GoogleDriveFile file)
         {
-            //ViewBag.Image = DetailsHelper.getImage(file);
-            //ImageMetadata imgData = new ImageMetadata();
-
-            //string name = Path.GetFileNameWithoutExtension(file.Name) + "@" + HttpContext.User.Identity.Name + Path.GetExtension(file.Name);
-
-            //using (shareYourView_DBEntities db = new shareYourView_DBEntities())
-            //{                
-            //    var img = db.ImageDetails.Where(a => a.image_Name == name).FirstOrDefault();
-
-            //    if(img != null)
-            //    {
-            //        imgData = db.ImageMetadatas.Where(a => a.image_ID == img.image_ID).FirstOrDefault();
-            //        //Debug.WriteLine("\n\n\n\n\n" + imgData.Address);
-            //    }                
-            //}
+            
             _DetailFile = file;
             //Set the image to view
             ViewBag.Image = DetailsHelper.getImage(file);
@@ -54,7 +40,6 @@ namespace ShareYourView.Controllers
             shareView.imgData = imgData;
             shareView.userData = userData;
 
-            //Debug.WriteLine("\n\n\n\n\n" + ViewBag.Image + "\n\n\n\n\n\n");
 
             return View(shareView);
         }
@@ -72,7 +57,6 @@ namespace ShareYourView.Controllers
                 if (img != null)
                 {
                     imgData = db.ImageMetadatas.Where(a => a.image_ID == img.image_ID).FirstOrDefault();
-                    //Debug.WriteLine("\n\n\n\n\n" + imgData.Address);
                 }
             }
 
@@ -113,16 +97,38 @@ namespace ShareYourView.Controllers
 
                 db.ImageShareds.Remove(x);
                 db.SaveChanges();
-                //Debug.Write("\n\n\n\n\n" + x.user_ID + "=" + x.image_ID);
             }
 
                 return RedirectToAction("DisplayView", "Detail", _DetailFile);
         }
 
-        public ActionResult DisplayImageInfo()
+        [HttpPost]
+        public ActionResult addNewShareUser(string email, int fileId)
         {
+            //add user to shared with the image
+            using(shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
+                var y = db.UserDetails.Where(a => a.user_Email == email).FirstOrDefault();
 
-            return View();
+                Debug.WriteLine("\n\nA=" + x.image_ID + "=A ---- B=" + y.user_ID + "=B\n\n\n");
+
+                if (x != null && y != null)
+                {
+                    ImageShared imgShare = new ImageShared();
+                    imgShare.image_ID = x.image_ID;
+                    imgShare.user_ID = y.user_ID;
+
+                    Debug.WriteLine("\n\nA=" + x.image_ID + "=A ---- B=" + y.user_ID + "=B\n\n\n");
+
+                    db.ImageShareds.Add(imgShare);
+                    db.SaveChanges();
+                }                
+            }
+
+            Debug.WriteLine("\n\n\n\nDONE\n\n\n");
+
+            return RedirectToAction("DisplayView", "Detail", _DetailFile);
         }
     }
 }
