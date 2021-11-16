@@ -195,6 +195,7 @@
     <Compile Include="Models\ImageShared.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\imageSharedView.cs" />
     <Compile Include="Models\ImageTag.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
@@ -235,8 +236,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Image\GetGoogleDriveFiles.cshtml" />
     <Content Include="Views\Share\GetGoogleShareDriveFiles.cshtml" />
-    <Content Include="Views\Detail\DisplayView.cshtml" />
     <Content Include="Views\Create\uploadNewImage.cshtml" />
+    <Content Include="Views\Detail\DisplayView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
