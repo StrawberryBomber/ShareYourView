@@ -239,6 +239,7 @@
     <Content Include="Views\Create\uploadNewImage.cshtml" />
     <Content Include="Views\Detail\DisplayView.cshtml" />
     <Content Include="Views\Share\viewDetails.cshtml" />
+    <Content Include="Views\Detail\updateMetaDataDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -84,8 +84,6 @@ namespace ShareYourView.Models
             // Define parameters of request.
             Google.Apis.Drive.v3.FilesResource.ListRequest FileListRequest = service.Files.List();
 
-            // for getting folders only.
-            //FileListRequest.Q = "mimeType='application/vnd.google-apps.folder'";
             FileListRequest.Fields = "nextPageToken, files(*)";
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = FileListRequest.Execute().Files;
@@ -114,6 +112,44 @@ namespace ShareYourView.Models
                 }
             }
             return FileList;
+        }
+
+        public static GoogleDriveFile getSingleDriveFile(string _fileName)
+        {
+            Google.Apis.Drive.v3.DriveService service = GetService();
+            // Define parameters of request.
+            Google.Apis.Drive.v3.FilesResource.ListRequest FileListRequest = service.Files.List();
+
+            FileListRequest.Fields = "nextPageToken, files(*)";
+            // List files.
+            IList<Google.Apis.Drive.v3.Data.File> files = FileListRequest.Execute().Files;
+            GoogleDriveFile returnFile = new GoogleDriveFile();
+
+            if (files != null && files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    GoogleDriveFile File = new GoogleDriveFile
+                    {
+                        Id = file.Id,
+                        Name = file.Name,
+                        Size = file.Size,
+                        Version = file.Version,
+                        CreatedTime = file.CreatedTime
+                    };
+                    
+                    
+
+                    if (File.Name == _fileName)
+                    {
+                        File.Name = file.Name.Replace("@" + HttpContext.Current.User.Identity.Name, "");
+                        returnFile = File;
+                        return returnFile;
+                    }
+
+                }
+            }
+            return null;
         }
 
         private static void saveImageToDatabase(string fileName, int id)

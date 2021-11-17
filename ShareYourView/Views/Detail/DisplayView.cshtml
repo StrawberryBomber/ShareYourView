@@ -85,6 +85,24 @@
 </div>
 
 
+@using (Html.BeginForm("updateMetaDataDetails", "Detail", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-offset-0 col-md-offset-0">
+        <label></label>
+        <div class="col-md-10">
+            <input type="hidden" name="fileId" value="@Model.imgData.image_ID" />
+            <input type="submit" class="updateMetaDataDetails" value="Update Details" style="align-content:center" width="300" />
+        </div>
+    </div>
+}
+
+<div style="padding: 7px">
+
+</div>
+
+
+
+
 <h4>
 
     Image Shared With:
@@ -183,7 +201,7 @@
 }
 
 <div style="padding: 7px">
-    
+
 </div>
 
 

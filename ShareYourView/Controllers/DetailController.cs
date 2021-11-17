@@ -26,7 +26,9 @@ namespace ShareYourView.Controllers
         [HttpGet]
         public ActionResult DisplayView(GoogleDriveFile file)
         {
+            
             _DetailFile = file;
+
             //Set the image to view
             ViewBag.Image = DetailsHelper.getImage(file);
             
@@ -120,13 +122,70 @@ namespace ShareYourView.Controllers
                     db.ImageShareds.Add(imgShare);
                     db.SaveChanges();
                     TempData["SuccessMessage"] = "Image was shared successfully";
-                }
+                }else
                 {
                     TempData["ErrorMessage"] = "Email Address could not be found. Please make sure you entered it correctly, or ask the user to sign up to share Images";
                 }
             }
 
             return RedirectToAction("DisplayView", "Detail", _DetailFile);
+        }
+
+        [HttpGet]
+        public ActionResult updateMetaDataDetails(int fileId)
+        {
+            ImageMetadata data = new ImageMetadata();
+
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                data = db.ImageMetadatas.Where(a => a.image_ID == fileId).FirstOrDefault();
+            }
+
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult updateMetaDataDetails(ImageMetadata imgData, int fileId)
+        {
+
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
+
+                if(x != null)
+                {
+                    ImageMetadata dataToUpdate = db.ImageMetadatas.Where(a => a.image_ID == x.image_ID).FirstOrDefault();
+
+                    dataToUpdate.Longitude = imgData.Longitude;
+                    dataToUpdate.Latitude = imgData.Latitude;
+                    dataToUpdate.City = imgData.City;
+                    dataToUpdate.Address = imgData.Address;
+                    dataToUpdate.capturedBy = imgData.capturedBy;
+                    dataToUpdate.capturedData = imgData.capturedData;
+
+                    db.SaveChanges();
+                    TempData["UpdatedSuccess"] = "The data has been updated successfully.";
+                }
+
+            }
+                       
+
+            return View(imgData);
+        }
+
+        [HttpPost]
+        public ActionResult navigateToView(int fileId)
+        {
+            GoogleDriveFile file = new GoogleDriveFile();
+
+            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            {
+                var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
+
+                file = GoogleDriveAPIHelper.getSingleDriveFile(x.image_Name);
+            }
+
+            return RedirectToAction("DisplayView", "Detail", file);
         }
     }
 }
