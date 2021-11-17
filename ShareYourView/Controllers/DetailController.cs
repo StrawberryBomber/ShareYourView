@@ -26,7 +26,6 @@ namespace ShareYourView.Controllers
         [HttpGet]
         public ActionResult DisplayView(GoogleDriveFile file)
         {
-            
             _DetailFile = file;
             //Set the image to view
             ViewBag.Image = DetailsHelper.getImage(file);
@@ -111,7 +110,6 @@ namespace ShareYourView.Controllers
                 var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
                 var y = db.UserDetails.Where(a => a.user_Email == email).FirstOrDefault();
 
-                Debug.WriteLine("\n\nA=" + x.image_ID + "=A ---- B=" + y.user_ID + "=B\n\n\n");
 
                 if (x != null && y != null)
                 {
@@ -119,14 +117,14 @@ namespace ShareYourView.Controllers
                     imgShare.image_ID = x.image_ID;
                     imgShare.user_ID = y.user_ID;
 
-                    Debug.WriteLine("\n\nA=" + x.image_ID + "=A ---- B=" + y.user_ID + "=B\n\n\n");
-
                     db.ImageShareds.Add(imgShare);
                     db.SaveChanges();
-                }                
+                    TempData["SuccessMessage"] = "Image was shared successfully";
+                }
+                {
+                    TempData["ErrorMessage"] = "Email Address could not be found. Please make sure you entered it correctly, or ask the user to sign up to share Images";
+                }
             }
-
-            Debug.WriteLine("\n\n\n\nDONE\n\n\n");
 
             return RedirectToAction("DisplayView", "Detail", _DetailFile);
         }

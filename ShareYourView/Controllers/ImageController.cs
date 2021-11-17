@@ -17,6 +17,7 @@ namespace ShareYourView.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult GetGoogleDriveFiles()
         {
@@ -60,6 +61,7 @@ namespace ShareYourView.Controllers
         {
             return RedirectToAction("DisplayView", "Detail", _file);
         }
+
     }
 
 }

@@ -35,5 +35,23 @@ namespace ShareYourView.Models
             return null;
         }
 
+        public static string getSharedImage(GoogleDriveFile file)
+        {
+            string[] test = Directory.GetFiles(getMapPath());
+
+            string image = "";
+
+            foreach (var c in test)
+            {
+                if ( c.Contains(Path.GetFileNameWithoutExtension(file.Name) + "@") && c.Contains(Path.GetExtension(file.Name)) )
+                {
+                    image = c;
+                    return image;
+                }
+            }
+
+            return null;
+        }
+
     }
 }

@@ -105,6 +105,7 @@ namespace ShareYourView.Models
                     };
                     if(file.Name.Contains(HttpContext.Current.User.Identity.Name))
                     {
+                        File._pathName = File.Name;
                         File.Name = file.Name.Replace("@" + HttpContext.Current.User.Identity.Name, "");
                         
                         FileList.Add(File);
@@ -133,14 +134,12 @@ namespace ShareYourView.Models
             // Define parameters of request.
             Google.Apis.Drive.v3.FilesResource.ListRequest FileListRequest = service.Files.List();
 
-            // for getting folders only.
-            //FileListRequest.Q = "mimeType='application/vnd.google-apps.folder'";
             FileListRequest.Fields = "nextPageToken, files(*)";
+
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = FileListRequest.Execute().Files;
             List<GoogleDriveFile> FileList = new List<GoogleDriveFile>();
-            // For getting only folders
-            // files = files.Where(x => x.MimeType == "application/vnd.google-apps.folder").ToList();
+
             if (files != null && files.Count > 0)
             {
                 foreach (var file in files)
@@ -173,7 +172,8 @@ namespace ShareYourView.Models
 
                                 if(x.image_Name == file.Name)
                                 {
-                                    File.Name = file.Name.Substring(0, file.Name.IndexOf('@'));
+                                    File._pathName = File.Name;
+                                    File.Name = file.Name.Substring(0, file.Name.IndexOf('@'));                                    
                                     FileList.Add(File);
                                 }
 

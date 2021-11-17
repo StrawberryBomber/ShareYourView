@@ -4,8 +4,6 @@
     ViewBag.Title = "DisplayView";
 }
 
-<h2>DisplayView</h2>
-<h2>Image</h2>
 <style>
     :root {
         --box-side: min( 42vmin, 480px );
@@ -174,7 +172,7 @@
 
 @using (Html.BeginForm("addNewShareUser", "Detail", FormMethod.Post))
 {
-    <div class="col-md-offset-0 col-md-offset-0" >
+    <div class="col-md-offset-0 col-md-offset-0">
         <label></label>
         <div class="col-md-10">
             <input type="text" name="email" value="" />
@@ -182,6 +180,27 @@
             <input type="submit" class="addNewShareUser" value="Share Image" style="align-content:center" width="300" />
         </div>
     </div>
+}
+
+<div style="padding: 7px">
+    
+</div>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissable">
+        <strong>@TempData["SuccessMessage"]</strong>
+    </div>
+}
+else
+{
+    if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <strong>@TempData["ErrorMessage"]</strong>
+        </div>
+    }
 }
 
 <hr />

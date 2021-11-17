@@ -35,12 +35,12 @@ namespace ShareYourView.Controllers
                     metadata.image_ID = x.image_ID;
                     Debug.WriteLine("\n\n\n\n\n" + metadata.image_ID);
                     db.ImageMetadatas.Add(metadata);
-                    db.SaveChanges();
-                }
-
-                
+                    db.SaveChanges();                    
+                }                
             }
-            ViewBag.Success = "File Uploaded Successfully";
+            ModelState.Clear();
+
+            ViewBag.Message = "File Uploaded Successfully";
             return View(metadata);
         }
 

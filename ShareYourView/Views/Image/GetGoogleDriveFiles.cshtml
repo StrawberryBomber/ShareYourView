@@ -7,6 +7,32 @@
 <h2>GetGoogleDriveFiles</h2>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+<style>
+    :root {
+        --box-side: min( 60vmin, 140px );
+    }
+
+    body {
+        align-items: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        background: grey;
+        border: 1px solid black;
+        height: var( --box-side - 40);
+        object-fit: contain;
+        width: var( --box-side );
+    }
+</style>
+
 <style type="text/css">
     #header {
         width: 100%;
@@ -45,23 +71,12 @@
     </div>
 }
 <center>
-    @*<div style="width:80%; text-align:left;">*@
-        @*@using (Html.BeginForm("UploadFile", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <p>
-                    <label for="file">Upload file:</label>
-                    <input type="file" name="file" id="file" />
-                        <div>
-                            <label>Testing View</label>
-                        </div>
-                    <input type="submit" value="Upload" />
-                </p>
-            }*@
-
-    @*</div>*@
 
     <table class="table" border="1">
         <tr id="header">
+            <th>
+                Image
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -87,6 +102,9 @@
             foreach (var item in Model)
             {
                 <tr id="layouttable">
+                    <td width="150">
+                        <img src="~/GoogleDriveFiles/@Path.GetFileName(item._pathName)" />
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>

@@ -11,6 +11,9 @@ namespace ShareYourView.Models
     public partial class ImageMetadata
     {
         public HttpPostedFileBase imageFile { get; set; }
+
+        [Display(Name = "Shared By")]
+        public string sharedBy { get; set; }
     }
 
     public class MetaData
