@@ -74,11 +74,28 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Upload New Image" class="btn btn-default" />
+            <input value="Clear" type="submit" class="btn btn-default" name="button" />
         </div>
     </div>
-    @ViewBag.Message;
+
+    <div style="padding: 7px">
+
+    </div>
+
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <strong>@TempData["SuccessMessage"]</strong>
+        </div>
+    }
+
 </div>
 }
+
+<div style="padding: 7px">
+
+</div>
 
 <div>
     @Html.ActionLink("Back to Images", "GetGoogleDriveFiles", "Image")

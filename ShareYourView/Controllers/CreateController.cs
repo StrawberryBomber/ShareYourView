@@ -17,6 +17,7 @@ namespace ShareYourView.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult uploadNewImage(ImageMetadata metadata)
         {
@@ -38,10 +39,12 @@ namespace ShareYourView.Controllers
                     db.SaveChanges();                    
                 }                
             }
+
             ModelState.Clear();
 
-            ViewBag.Message = "File Uploaded Successfully";
-            return View(metadata);
+            TempData["SuccessMessage"] = "Image uploaded successfully";
+
+            return View("uploadNewImage");
         }
 
     }

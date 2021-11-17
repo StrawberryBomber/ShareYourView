@@ -71,22 +71,9 @@ namespace ShareYourView.Controllers
 
                     imgData.sharedBy = sharedUser.user_FName + " " + sharedUser.user_LName + "  -  " + sharedUser.user_Email;
 
-                    Debug.WriteLine("\n\n\n" + sharedUser.user_Username + "\n\n\n");
                 }
 
             }
-
-                //string name = Path.GetFileNameWithoutExtension(file.Name) + "@" + HttpContext.User.Identity.Name + Path.GetExtension(file.Name);
-
-                //using (shareYourView_DBEntities db = new shareYourView_DBEntities())
-                //{
-                //    var img = db.ImageDetails.Where(a => a.image_Name == name).FirstOrDefault();
-
-                //    if (img != null)
-                //    {
-                //        imgData = db.ImageMetadatas.Where(a => a.image_ID == img.image_ID).FirstOrDefault();
-                //    }
-                //}
 
                 return imgData;
         }
