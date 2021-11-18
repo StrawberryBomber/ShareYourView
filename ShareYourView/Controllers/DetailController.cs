@@ -112,16 +112,26 @@ namespace ShareYourView.Controllers
                 var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
                 var y = db.UserDetails.Where(a => a.user_Email == email).FirstOrDefault();
 
+                
 
                 if (x != null && y != null)
                 {
-                    ImageShared imgShare = new ImageShared();
-                    imgShare.image_ID = x.image_ID;
-                    imgShare.user_ID = y.user_ID;
 
-                    db.ImageShareds.Add(imgShare);
-                    db.SaveChanges();
-                    TempData["SuccessMessage"] = "Image was shared successfully";
+                    if(y.user_IsVerified == true)
+                    {
+                        ImageShared imgShare = new ImageShared();
+                        imgShare.image_ID = x.image_ID;
+                        imgShare.user_ID = y.user_ID;
+
+                        db.ImageShareds.Add(imgShare);
+                        db.SaveChanges();
+                        TempData["SuccessMessage"] = "Image was shared successfully";
+                    }
+                    else
+                    {
+                        TempData["VerfiedMessage"] = "The user has not yet verfied their email. Please ask them to verify before you can share the image.";
+                    }
+                    
                 }else
                 {
                     TempData["ErrorMessage"] = "Email Address could not be found. Please make sure you entered it correctly, or ask the user to sign up to share Images";

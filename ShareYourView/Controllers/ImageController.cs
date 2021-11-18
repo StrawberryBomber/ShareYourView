@@ -42,9 +42,11 @@ namespace ShareYourView.Controllers
         public void DownloadFile(string id)
         {
             string FilePath = GoogleDriveAPIHelper.DownloadGoogleFile(id);
-            
+            string w_name = Path.GetFileNameWithoutExtension(FilePath).Replace("@" + HttpContext.User.Identity.Name, "");
+            string name = w_name + Path.GetExtension(FilePath);
+
             Response.ContentType = "application/zip";
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(FilePath));
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + name);
             Response.WriteFile(System.Web.HttpContext.Current.Server.MapPath("~/GoogleDriveFiles/" + Path.GetFileName(FilePath)));
             Response.End();
             Response.Flush();

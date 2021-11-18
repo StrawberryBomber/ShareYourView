@@ -188,6 +188,9 @@
 
 </center>
 
+<div>
+    <label>User Email address:</label>
+</div>
 @using (Html.BeginForm("addNewShareUser", "Detail", FormMethod.Post))
 {
     <div class="col-md-offset-0 col-md-offset-0">
@@ -211,14 +214,20 @@
         <strong>@TempData["SuccessMessage"]</strong>
     </div>
 }
-else
+else if (TempData["ErrorMessage"] != null)
 {
-    if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger alert-dismissable">
-            <strong>@TempData["ErrorMessage"]</strong>
-        </div>
-    }
+
+
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["ErrorMessage"]</strong>
+    </div>
+
+}
+else if (TempData["VerfiedMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["VerfiedMessage"]</strong>
+    </div>
 }
 
 <hr />
