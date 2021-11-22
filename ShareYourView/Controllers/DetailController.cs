@@ -51,7 +51,7 @@ namespace ShareYourView.Controllers
 
             string name = Path.GetFileNameWithoutExtension(file.Name) + "@" + HttpContext.User.Identity.Name + Path.GetExtension(file.Name);
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var img = db.ImageDetails.Where(a => a.image_Name == name).FirstOrDefault();
 
@@ -69,7 +69,7 @@ namespace ShareYourView.Controllers
             List<UserDetail> listUser = new List<UserDetail>();
             string name = Path.GetFileNameWithoutExtension(file.Name) + "@" + HttpContext.User.Identity.Name + Path.GetExtension(file.Name);
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var img = db.ImageDetails.Where(a => a.image_Name == name).FirstOrDefault();
                 int imgID = img.image_ID;
@@ -92,7 +92,7 @@ namespace ShareYourView.Controllers
 
         public ActionResult Unshare(int userId, int fileId)
         {
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var x = db.ImageShareds.Where(a => a.image_ID == fileId && a.user_ID == userId).FirstOrDefault();
 
@@ -107,7 +107,7 @@ namespace ShareYourView.Controllers
         public ActionResult addNewShareUser(string email, int fileId)
         {
             //add user to shared with the image
-            using(shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using(Entities db = new Entities())
             {
                 var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
                 var y = db.UserDetails.Where(a => a.user_Email == email).FirstOrDefault();
@@ -146,7 +146,7 @@ namespace ShareYourView.Controllers
         {
             ImageMetadata data = new ImageMetadata();
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 data = db.ImageMetadatas.Where(a => a.image_ID == fileId).FirstOrDefault();
             }
@@ -158,7 +158,7 @@ namespace ShareYourView.Controllers
         public ActionResult updateMetaDataDetails(ImageMetadata imgData, int fileId)
         {
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
 
@@ -188,10 +188,10 @@ namespace ShareYourView.Controllers
         {
             GoogleDriveFile file = new GoogleDriveFile();
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var x = db.ImageDetails.Where(a => a.image_ID == fileId).FirstOrDefault();
-
+                Debug.WriteLine("\n\n\n" + x.image_Name);
                 file = GoogleDriveAPIHelper.getSingleDriveFile(x.image_Name);
             }
 

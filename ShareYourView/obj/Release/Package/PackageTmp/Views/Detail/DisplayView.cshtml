@@ -1,0 +1,238 @@
+﻿@model ShareYourView.Models.imageSharedView
+
+@{
+    ViewBag.Title = "DisplayView";
+}
+
+<style>
+    :root {
+        --box-side: min( 42vmin, 480px );
+    }
+
+    body {
+        align-items: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        background: grey;
+        border: 1px solid black;
+        height: var( --box-side );
+        object-fit: contain;
+        width: var( --box-side );
+    }
+</style>
+
+<div>
+    <img src="~/GoogleDriveFiles/@Path.GetFileName(ViewBag.Image)" />
+</div>
+
+<div>
+    <h4>Image Details:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.Latitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.capturedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.capturedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.imgData.capturedData)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.imgData.capturedData)
+        </dd>
+
+    </dl>
+</div>
+
+
+@using (Html.BeginForm("updateMetaDataDetails", "Detail", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-offset-0 col-md-offset-0">
+        <label></label>
+        <div class="col-md-10">
+            <input type="hidden" name="fileId" value="@Model.imgData.image_ID" />
+            <input type="submit" class="updateMetaDataDetails" value="Update Details" style="align-content:center" width="300" />
+        </div>
+    </div>
+}
+
+<div style="padding: 7px">
+
+</div>
+
+
+
+
+<h4>
+
+    Image Shared With:
+</h4>
+<hr />
+
+<style type="text/css">
+    #header {
+        width: 100%;
+        background-color: #CCCCCC;
+        text-align: center;
+    }
+
+    #layouttable {
+        border: 0px;
+        width: 100%;
+        font-family: 'Segoe UI';
+    }
+
+        #layouttable td.col1 {
+            width: 20%;
+            vertical-align: top;
+        }
+
+        #layouttable td.col2 {
+            width: 60%;
+            vertical-align: top;
+            background-color: #E8E8E8;
+        }
+
+        #layouttable td.col3 {
+            width: 20%;
+            vertical-align: top;
+        }
+</style>
+
+
+<center>
+
+    <table class="table" border="1">
+        <tr id="header">
+            <th>
+                User Name
+            </th>
+            <th>
+                User Email Address
+            </th>
+            <th>
+                Unshare
+            </th>
+        </tr>
+
+        @if (Model.userData.Count() > 0)
+        {
+            foreach (var item in Model.userData)
+            {
+                <tr id="layouttable">
+                    <td>
+                        @Html.DisplayFor(m => item.user_FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.user_Email)
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Unshare", "Detail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="userId" value="@item.user_ID" />
+                            <input type="hidden" name="fileId" value="@Model.imgData.image_ID" />
+                            <input type="hidden" name="Name" value="@ViewBag.Image" />
+                            <input type="submit" class="DisplayView" value="Unshare" style="align-content:center" />
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <td colspan="6">No Users shared with</td>
+        }
+
+    </table>
+
+
+</center>
+
+<div>
+    <label>User Email address:</label>
+</div>
+@using (Html.BeginForm("addNewShareUser", "Detail", FormMethod.Post))
+{
+    <div class="col-md-offset-0 col-md-offset-0">
+        <label></label>
+        <div class="col-md-10">
+            <input type="text" name="email" value="" />
+            <input type="hidden" name="fileId" value="@Model.imgData.image_ID" />
+            <input type="submit" class="addNewShareUser" value="Share Image" style="align-content:center" width="300" />
+        </div>
+    </div>
+}
+
+<div style="padding: 7px">
+
+</div>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissable">
+        <strong>@TempData["SuccessMessage"]</strong>
+    </div>
+}
+else if (TempData["ErrorMessage"] != null)
+{
+
+
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["ErrorMessage"]</strong>
+    </div>
+
+}
+else if (TempData["VerfiedMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["VerfiedMessage"]</strong>
+    </div>
+}
+
+<hr />
+
+<p>
+    @Html.ActionLink("Back to Images", "GetGoogleDriveFiles", "Image")
+</p>
+

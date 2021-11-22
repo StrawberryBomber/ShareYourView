@@ -13,10 +13,10 @@ namespace ShareYourView.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class shareYourView_DBEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public shareYourView_DBEntities()
-            : base("name=shareYourView_DBEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -28,8 +28,6 @@ namespace ShareYourView.Models
         public virtual DbSet<ImageDetail> ImageDetails { get; set; }
         public virtual DbSet<ImageMetadata> ImageMetadatas { get; set; }
         public virtual DbSet<ImageShared> ImageShareds { get; set; }
-        public virtual DbSet<ImageTag> ImageTags { get; set; }
-        public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="ImageDetails">
+      <EntityTypeMapping TypeName="Model.ImageDetail">
+        <MappingFragment StoreEntitySet="ImageDetails">
+          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+          <ScalarProperty Name="image_Name" ColumnName="image_Name" />
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageMetadatas">
+      <EntityTypeMapping TypeName="Model.ImageMetadata">
+        <MappingFragment StoreEntitySet="ImageMetadata">
+          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="capturedData" ColumnName="capturedData" />
+          <ScalarProperty Name="capturedBy" ColumnName="capturedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageShareds">
+      <EntityTypeMapping TypeName="Model.ImageShared">
+        <MappingFragment StoreEntitySet="ImageShared">
+          <ScalarProperty Name="shared_ID" ColumnName="shared_ID" />
+          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="Model.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+          <ScalarProperty Name="user_FName" ColumnName="user_FName" />
+          <ScalarProperty Name="user_LName" ColumnName="user_LName" />
+          <ScalarProperty Name="user_Email" ColumnName="user_Email" />
+          <ScalarProperty Name="user_Username" ColumnName="user_Username" />
+          <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+          <ScalarProperty Name="user_IsVerified" ColumnName="user_IsVerified" />
+          <ScalarProperty Name="user_ActivationCode" ColumnName="user_ActivationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

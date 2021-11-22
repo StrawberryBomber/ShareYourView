@@ -67,7 +67,7 @@ namespace ShareYourView.Models
                     request.Upload();
                 }
 
-                using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                using (Entities db = new Entities())
                 {
                     var v = db.UserDetails.Where(a => a.user_Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
                     int user_id = v.user_ID;
@@ -154,7 +154,7 @@ namespace ShareYourView.Models
 
         private static void saveImageToDatabase(string fileName, int id)
         {
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 ImageDetail imgD = new ImageDetail();
                 imgD.image_Name = fileName;
@@ -189,7 +189,7 @@ namespace ShareYourView.Models
                         CreatedTime = file.CreatedTime
                     };
 
-                    using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                    using (Entities db = new Entities())
                     {
                         var v = db.UserDetails.Where(a => a.user_Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
                         if (v != null)
@@ -284,7 +284,7 @@ namespace ShareYourView.Models
                     throw new ArgumentNullException(file.Id);
                 }
 
-                using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                using (Entities db = new Entities())
                 {
                     string fileName = file.Name.Substring(0, file.Name.IndexOf('.'));
                     fileName += ("@" + HttpContext.Current.User.Identity.Name);
@@ -332,77 +332,6 @@ namespace ShareYourView.Models
             }
         }
 
-        //// Create Folder in root
-        //public static void CreateFolder(string FolderName)
-        //{
-        //    DriveService service = GetService();
-        //    var FileMetaData = new Google.Apis.Drive.v3.Data.File();
-        //    FileMetaData.Name = FolderName;
-        //    //this mimetype specify that we need folder in google drive
-        //    FileMetaData.MimeType = "application/vnd.google-apps.folder";
-        //    FilesResource.CreateRequest request;
-        //    request = service.Files.Create(FileMetaData);
-        //    request.Fields = "id";
-        //    var file = request.Execute();
-
-        //}
-
-        //// File upload in existing folder
-        //public static void FileUploadInFolder(string folderId, HttpPostedFileBase file)
-        //{
-        //    if (file != null && file.ContentLength > 0)
-        //    {
-        //        //create service
-        //        DriveService service = GetService();
-        //        //get file path
-        //        string path = Path.Combine(HttpContext.Current.Server.MapPath("~/GoogleDriveFiles"),
-        //        Path.GetFileName(file.FileName));
-        //        file.SaveAs(path);
-        //        //create file metadata
-        //        var FileMetaData = new Google.Apis.Drive.v3.Data.File()
-        //        {
-        //            Name = Path.GetFileName(file.FileName),
-        //            MimeType = MimeMapping.GetMimeMapping(path),
-        //            //id of parent folder 
-        //            Parents = new List<string>
-        //            {
-        //                folderId
-        //            }
-        //        };
-        //        FilesResource.CreateMediaUpload request;
-        //        //create stream and upload
-        //        using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
-        //        {
-        //            request = service.Files.Create(FileMetaData, stream, FileMetaData.MimeType);
-        //            request.Fields = "id";
-        //            request.Upload();
-        //        }
-        //        var file1 = request.ResponseBody;
-        //    }
-        //}
-
-        //public static List<GoogleDriveFile> GetDriveFolders()
-        //{
-        //    DriveService service = GetService();
-        //    List<GoogleDriveFile> FolderList = new List<GoogleDriveFile>();
-        //    FilesResource.ListRequest request = service.Files.List();
-        //    request.Q = "mimeType='application/vnd.google-apps.folder'";
-        //    request.Fields = "files(id, name)";
-        //    Google.Apis.Drive.v3.Data.FileList result = request.Execute();
-        //    foreach (var file in result.Files)
-        //    {
-        //        GoogleDriveFile File = new GoogleDriveFile
-        //        {
-        //            Id = file.Id,
-        //            Name = file.Name,
-        //            Size = file.Size,
-        //            Version = file.Version,
-        //            CreatedTime = file.CreatedTime
-        //        };
-        //        FolderList.Add(File);
-        //    }
-        //    return FolderList;
-        //}
 
     }
 }

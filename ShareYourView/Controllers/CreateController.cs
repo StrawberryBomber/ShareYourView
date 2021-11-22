@@ -24,7 +24,7 @@ namespace ShareYourView.Controllers
             GoogleDriveAPIHelper.UplaodFileOnDrive(metadata.imageFile);
             
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 string name = Path.GetFileNameWithoutExtension(metadata.imageFile.FileName) + "@" + HttpContext.User.Identity.Name + Path.GetExtension(metadata.imageFile.FileName);
 

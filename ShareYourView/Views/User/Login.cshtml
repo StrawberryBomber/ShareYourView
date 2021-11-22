@@ -48,6 +48,13 @@
     </div>
 }
 
+@if (TempData["invalidMesasge"] != null)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["invalidMesasge"]</strong>
+    </div>
+}
+
 <div>
     @Html.ActionLink("Create New Account", "Registration", "User")
 </div>

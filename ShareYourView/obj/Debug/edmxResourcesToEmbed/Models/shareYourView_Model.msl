@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="shareYourView_DBModelStoreContainer" CdmEntityContainer="shareYourView_DBEntities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
     <EntitySetMapping Name="ImageDetails">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageDetail">
+      <EntityTypeMapping TypeName="Model.ImageDetail">
         <MappingFragment StoreEntitySet="ImageDetails">
           <ScalarProperty Name="image_ID" ColumnName="image_ID" />
           <ScalarProperty Name="image_Name" ColumnName="image_Name" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ImageMetadatas">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageMetadata">
+      <EntityTypeMapping TypeName="Model.ImageMetadata">
         <MappingFragment StoreEntitySet="ImageMetadata">
           <ScalarProperty Name="image_ID" ColumnName="image_ID" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
@@ -24,7 +24,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ImageShareds">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageShared">
+      <EntityTypeMapping TypeName="Model.ImageShared">
         <MappingFragment StoreEntitySet="ImageShared">
           <ScalarProperty Name="shared_ID" ColumnName="shared_ID" />
           <ScalarProperty Name="image_ID" ColumnName="image_ID" />
@@ -32,25 +32,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ImageTags">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.ImageTag">
-        <MappingFragment StoreEntitySet="ImageTag">
-          <ScalarProperty Name="imageTag_ID" ColumnName="imageTag_ID" />
-          <ScalarProperty Name="image_ID" ColumnName="image_ID" />
-          <ScalarProperty Name="tag_ID" ColumnName="tag_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Tags">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.Tag">
-        <MappingFragment StoreEntitySet="Tag">
-          <ScalarProperty Name="tag_ID" ColumnName="tag_ID" />
-          <ScalarProperty Name="tag_Name" ColumnName="tag_Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserDetails">
-      <EntityTypeMapping TypeName="shareYourView_DBModel.UserDetail">
+      <EntityTypeMapping TypeName="Model.UserDetail">
         <MappingFragment StoreEntitySet="UserDetails">
           <ScalarProperty Name="user_ID" ColumnName="user_ID" />
           <ScalarProperty Name="user_FName" ColumnName="user_FName" />

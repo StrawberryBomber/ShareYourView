@@ -1,0 +1,148 @@
+﻿@model IEnumerable<ShareYourView.Models.GoogleDriveFile>
+@{
+    ViewBag.Title = "GetGoogleShareDriveFiles";
+}
+
+<h2>Images Shared With Me:</h2>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<style>
+    :root {
+        --box-side: min( 60vmin, 150px );
+    }
+
+    body {
+        align-items: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        background: grey;
+        border: 1px solid black;
+        height: var( --box-side );
+        object-fit: contain;
+        width: var( --box-side );
+    }
+</style>
+
+<style type="text/css">
+    #header {
+        width: 100%;
+        background-color: #CCCCCC;
+        text-align: center;
+    }
+
+    #layouttable {
+        border: 0px;
+        width: 100%;
+        font-family: 'Segoe UI';
+    }
+
+        #layouttable td.col1 {
+            width: 20%;
+            vertical-align: top;
+        }
+
+        #layouttable td.col2 {
+            width: 60%;
+            vertical-align: top;
+            background-color: #E8E8E8;
+        }
+
+        #layouttable td.col3 {
+            width: 20%;
+            vertical-align: top;
+        }
+</style>
+
+<center>
+
+    <table class="table" border="1">
+        <tr id="header">
+            <th width="100">
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedTime)
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Download
+            </th>
+        </tr>
+
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr id="layouttable">
+                    <td>
+                        <img src="~/GoogleDriveFiles/@Path.GetFileName(item._pathName)" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @{
+                            long? KiloByte = @item.Size / 1024;
+                            string NewSize = KiloByte + " KB";
+                        }
+                        @NewSize
+                    </td>
+                    <td>
+                        @string.Format("{0: MM/dd/yyyy}", Convert.ToDateTime(Html.DisplayFor(modelItem => item.CreatedTime).ToString()))
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("viewDetails", "Share", FormMethod.Get, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input type="hidden" name=Name value="@item.Name" />
+                            <input type="submit" class="viewDetails" value="Details" style="align-content:center" />
+                        }
+                    </td>
+                    <td>
+                        <input type="button" class="DownloadFile" value="Download" data-key=@item.Id style="align-content:center" />
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <td colspan="6">No files found</td>
+        }
+
+    </table>
+
+</center>
+
+@using (Html.BeginForm("returnToHome", "Share", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-offset-0">
+            <input type="submit" value="Return Home" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<script>
+    $(document).on('click', '.DownloadFile', function () {
+        debugger;
+        var fileId = $(this).attr("data-key");
+        window.location.href = '/Image/DownloadFile/' + fileId;
+    });
+</script>

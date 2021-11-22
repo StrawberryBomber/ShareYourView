@@ -145,6 +145,8 @@
     <Content Include="Models\shareYourView_Model.edmx.diagram">
       <DependentUpon>shareYourView_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="client_secret_846325098136-evv3o015nuplv4726rfo1e0v8mfs32l0.apps.googleusercontent.com.json" />
+    <None Include="Properties\PublishProfiles\Share-Your-View-Service - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Models\shareYourView_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -196,9 +198,6 @@
       <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imageSharedView.cs" />
-    <Compile Include="Models\ImageTag.cs">
-      <DependentUpon>shareYourView_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\shareYourView_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,9 +212,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>shareYourView_Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tag.cs">
-      <DependentUpon>shareYourView_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
       <DependentUpon>shareYourView_Model.tt</DependentUpon>

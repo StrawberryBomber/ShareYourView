@@ -51,7 +51,7 @@ namespace ShareYourView.Controllers
                 userDetail.user_IsVerified = false;
 
                 #region //Save data to database
-                    using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+                    using (Entities db = new Entities())
                     {
                         db.UserDetails.Add(userDetail);
                         db.SaveChanges();
@@ -80,7 +80,7 @@ namespace ShareYourView.Controllers
         {
             bool Status = false;
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
 
@@ -114,7 +114,7 @@ namespace ShareYourView.Controllers
         {
             string Message = "";
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var v = db.UserDetails.Where(a => a.user_Username == login.user_Username).FirstOrDefault();
                 if(v != null)
@@ -142,11 +142,13 @@ namespace ShareYourView.Controllers
                     else
                     {
                         Message = "Invalid Password provided";
+                        TempData["invalidMesasge"] = "User not found please try again";
                     }
                 }
                 else
                 {
                     Message = "Imvalid credentials provided";
+                    TempData["invalidMesasge"] = "User not found please try again";
                 }
             }
 
@@ -167,7 +169,7 @@ namespace ShareYourView.Controllers
         [NonAction]
         public bool isEmailExist(string email)
         {
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var v = db.UserDetails.Where(a => a.user_Email == email).FirstOrDefault();
                 return v != null;

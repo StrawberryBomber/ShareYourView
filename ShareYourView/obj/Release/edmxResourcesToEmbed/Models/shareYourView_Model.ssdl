@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ImageDetails">
+    <Key>
+      <PropertyRef Name="image_ID" />
+    </Key>
+    <Property Name="image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="ImageMetadata">
+    <Key>
+      <PropertyRef Name="image_ID" />
+    </Key>
+    <Property Name="image_ID" Type="int" Nullable="false" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="capturedData" Type="date" />
+    <Property Name="capturedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ImageShared">
+    <Key>
+      <PropertyRef Name="shared_ID" />
+    </Key>
+    <Property Name="shared_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image_ID" Type="int" />
+    <Property Name="user_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="user_ID" />
+    </Key>
+    <Property Name="user_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_LName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="user_IsVerified" Type="bit" Nullable="false" />
+    <Property Name="user_ActivationCode" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="ImageDetails" EntityType="Self.ImageDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageMetadata" EntityType="Self.ImageMetadata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageShared" EntityType="Self.ImageShared" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

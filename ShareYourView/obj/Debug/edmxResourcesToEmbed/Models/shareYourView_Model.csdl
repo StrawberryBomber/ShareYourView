@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="shareYourView_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="ImageDetail">
     <Key>
       <PropertyRef Name="image_ID" />
@@ -28,21 +28,6 @@
     <Property Name="image_ID" Type="Int32" />
     <Property Name="user_ID" Type="Int32" />
   </EntityType>
-  <EntityType Name="ImageTag">
-    <Key>
-      <PropertyRef Name="imageTag_ID" />
-    </Key>
-    <Property Name="imageTag_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="image_ID" Type="Int32" />
-    <Property Name="tag_ID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Tag">
-    <Key>
-      <PropertyRef Name="tag_ID" />
-    </Key>
-    <Property Name="tag_ID" Type="Int32" Nullable="false" />
-    <Property Name="tag_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="UserDetail">
     <Key>
       <PropertyRef Name="user_ID" />
@@ -56,12 +41,10 @@
     <Property Name="user_IsVerified" Type="Boolean" Nullable="false" />
     <Property Name="user_ActivationCode" Type="Guid" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="shareYourView_DBEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ImageDetails" EntityType="Self.ImageDetail" />
     <EntitySet Name="ImageMetadatas" EntityType="Self.ImageMetadata" />
     <EntitySet Name="ImageShareds" EntityType="Self.ImageShared" />
-    <EntitySet Name="ImageTags" EntityType="Self.ImageTag" />
-    <EntitySet Name="Tags" EntityType="Self.Tag" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
   </EntityContainer>
 </Schema>

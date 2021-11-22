@@ -53,7 +53,7 @@ namespace ShareYourView.Controllers
 
             string name = Path.GetFileNameWithoutExtension(file.Name) + "@";
 
-            using (shareYourView_DBEntities db = new shareYourView_DBEntities())
+            using (Entities db = new Entities())
             {
                 var img = db.ImageDetails.Where(a => a.image_Name.Contains(name)).FirstOrDefault();
 

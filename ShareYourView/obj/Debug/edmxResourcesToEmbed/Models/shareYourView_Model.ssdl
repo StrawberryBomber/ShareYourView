@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="shareYourView_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="ImageDetails">
     <Key>
       <PropertyRef Name="image_ID" />
@@ -28,21 +28,6 @@
     <Property Name="image_ID" Type="int" />
     <Property Name="user_ID" Type="int" />
   </EntityType>
-  <EntityType Name="ImageTag">
-    <Key>
-      <PropertyRef Name="imageTag_ID" />
-    </Key>
-    <Property Name="imageTag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="image_ID" Type="int" />
-    <Property Name="tag_ID" Type="int" />
-  </EntityType>
-  <EntityType Name="Tag">
-    <Key>
-      <PropertyRef Name="tag_ID" />
-    </Key>
-    <Property Name="tag_ID" Type="int" Nullable="false" />
-    <Property Name="tag_Name" Type="nvarchar" MaxLength="50" />
-  </EntityType>
   <EntityType Name="UserDetails">
     <Key>
       <PropertyRef Name="user_ID" />
@@ -56,12 +41,10 @@
     <Property Name="user_IsVerified" Type="bit" Nullable="false" />
     <Property Name="user_ActivationCode" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="shareYourView_DBModelStoreContainer">
+  <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="ImageDetails" EntityType="Self.ImageDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageMetadata" EntityType="Self.ImageMetadata" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageShared" EntityType="Self.ImageShared" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ImageTag" EntityType="Self.ImageTag" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

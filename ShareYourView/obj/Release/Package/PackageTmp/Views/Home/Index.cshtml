@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Home</h2>
+
+Welcome
+<b>@HttpContext.Current.User.Identity.Name</b>
+<br />
+<br />
+
+@using (Html.BeginForm("viewImages", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-offset-0">
+            <input type="submit" value="View Images" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("viewSharedImages", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-offset-0">
+            <input type="submit" value="View Shared Images" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Logout", "User", FormMethod.Post))
+{
+    <a href="javascript:;" onclick="document.forms[2].submit();">Logout</a>
+}
